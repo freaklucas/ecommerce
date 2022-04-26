@@ -19,17 +19,6 @@ export default {
   actions: {
     getProducts: async function ({ commit }) {
       try {
-        /* 
-        const response = await axios.get("https://fakestoreapi.com/products", {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods":
-              "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-            "Access-Control-Allow-Headers":
-              "Origin, Content-Type, X-Auth-Token",
-          },
-        });
-        */
         let dataUrl = `https://fakestoreapi.com/products`;
         let response = await axios.get(dataUrl);
 
