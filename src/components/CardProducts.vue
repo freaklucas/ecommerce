@@ -5,7 +5,10 @@
 
       <div class="about">
         <div v-for="cart in productsState.products" :key="cart.id">
-          {{ cart }}
+          {{ cart.image }}
+        </div>
+        <div v-for="image in productsState.products" :key="image">
+          <img :src="image.image" alt="" />
         </div>
       </div>
     </b-row>
