@@ -2,7 +2,10 @@
   <b-container class="bv-example-row bv-example-row-flex-cols container">
     <b-row align="center">
       <h1>Sneakers, Select your favorite product ;)</h1>
-      <div>Carrinho ...</div>
+      <div class="shopping-cart" v-if="calculatorState.count > 1">
+        <h1 class="section">🛒 Cart</h1>
+        <h2>$ {{ calculatorState.count }}</h2>
+      </div>
       <b-col cols="12">
         <div class="card-images">
           <b-card
@@ -26,7 +29,14 @@
 
             <p href="#" variant="primary">Price: {{ image.price }}</p>
 
-            <b-button href="#" class="buy-button">Buy + </b-button>
+            <b-button
+              @click="clickIncrementValue(image.price)"
+              class="buy-button"
+              >Buy
+            </b-button>
+            <b-button @click="clickDecrement(image.price)" class="button-remove"
+              >Remove
+            </b-button>
           </b-card>
         </div>
       </b-col>
@@ -41,9 +51,24 @@ export default {
   created: function () {
     this.$store.dispatch("productsModule/getProducts");
   },
-
+  methods: {
+    clickIncrement() {
+      this.$stire.dispatch("calculatorModule/incrementCounter");
+    },
+    clickDecrement(value) {
+      this.$store.dispatch("calculatorModule/decrementCounter", {
+        value: value,
+      });
+    },
+    clickIncrementValue(value) {
+      this.$store.dispatch("calculatorModule/incrementValue", {
+        value: value,
+      });
+    },
+  },
   computed: mapGetters({
     productsState: "getProductsState",
+    calculatorState: "getCalculatorState",
   }),
 };
 </script>
@@ -87,12 +112,15 @@ export default {
 }
 
 .buy-button {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   outline: none;
   cursor: pointer;
   font-weight: 600;
   border-radius: 3px;
-  padding: 12px 24px;
+  padding: 12px 32px;
   border: 0;
   color: #000021;
   background: #1de9b6;
@@ -108,10 +136,35 @@ export default {
   text-decoration: none;
   margin-bottom: 4px;
 }
-
 .buy-button:hover {
   transition: all 0.1s ease;
-  box-shadow: 0 0 0 0 #fff, 0 0 0 3px #1de9b6;
+  box-shadow: 0 0 0 0 #fff, 0 0 0 3px #47a38c;
+}
+
+.button-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 15px;
+  outline: none;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 3px;
+  padding: 12px 32px;
+  border: 0;
+  color: #000021;
+  background: #ff6666;
+  line-height: 1.15;
+  font-size: 16px;
+
+  text-decoration: none;
+  margin-bottom: 4px;
+}
+
+.button-remove:hover {
+  transition: all 0.1s ease;
+  box-shadow: 0 0 0 0 #fff, 0 0 0 3px #ff6666;
 }
 
 .container {
@@ -136,6 +189,36 @@ img {
 }
 
 h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Fira Code", monospace;
+  font-family: "Gentium Book Basic", serif;
+  font-family: "Poppins", sans-serif;
+
+  font-size: 1.5rem;
+}
+
+.shopping-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+
+  margin: 8px;
+
+  box-shadow: 1px 2px 3px 4px rgba(20, 20, 20, 0.4);
+}
+
+.section {
   display: flex;
   align-items: center;
   justify-content: center;
