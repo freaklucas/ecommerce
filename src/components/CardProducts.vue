@@ -4,7 +4,21 @@
       <h1>Sneakers, Select your favorite product ;)</h1>
       <div class="shopping-cart" v-if="calculatorState.count > 1">
         <h1 class="section">🛒 Cart</h1>
-        <h2>$ {{ calculatorState.count }}</h2>
+        <h2>$ {{ calculatorState.count }} | {{ productsState.title }}</h2>
+        <!-- <h2>$ {{ calculatorState.title }}</h2> -->
+        <br />
+        <!-- <div
+          class="product-selected"
+          v-for="selected in productsState.products"
+          :key="selected.id"
+        >
+          <h2>Product selected:</h2>
+          <ul>
+            <li>
+              {{ selected.title }}
+            </li>
+          </ul>
+        </div> -->
       </div>
       <b-col cols="12">
         <div class="card-images">
