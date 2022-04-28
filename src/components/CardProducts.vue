@@ -1,24 +1,12 @@
 <template>
   <b-container class="bv-example-row bv-example-row-flex-cols container">
     <b-row align="center">
-      <h1>Sneakers, Select your favorite product ;)</h1>
+      <h1 class="title">Sneakers, Select your favorite product ;)</h1>
       <div class="shopping-cart" v-if="calculatorState.count > 1">
         <h1 class="section">🛒 Cart</h1>
         <h2>$ {{ calculatorState.count }} | {{ productsState.title }}</h2>
-        <!-- <h2>$ {{ calculatorState.title }}</h2> -->
+
         <br />
-        <!-- <div
-          class="product-selected"
-          v-for="selected in productsState.products"
-          :key="selected.id"
-        >
-          <h2>Product selected:</h2>
-          <ul>
-            <li>
-              {{ selected.title }}
-            </li>
-          </ul>
-        </div> -->
       </div>
       <b-col cols="12">
         <div class="card-images">
@@ -42,15 +30,20 @@
             </b-card-text>
 
             <p href="#" variant="primary">Price: {{ image.price }}</p>
-
-            <b-button
-              @click="clickIncrementValue(image.price)"
-              class="buy-button"
-              >Buy
-            </b-button>
-            <b-button @click="clickDecrement(image.price)" class="button-remove"
-              >Remove
-            </b-button>
+            <div class="buttons">
+              <button
+                @click="clickIncrementValue(image.price)"
+                class="buy-button"
+              >
+                Buy
+              </button>
+              <button
+                @click="clickDecrement(image.price)"
+                class="button-remove"
+              >
+                Remove
+              </button>
+            </div>
           </b-card>
         </div>
       </b-col>
@@ -93,9 +86,11 @@ export default {
   background-color: #fff;
 
   display: flex;
-  flex-direction: column;
+
   align-items: center;
   justify-content: center;
+
+  flex-direction: row;
 
   min-width: 0;
   word-wrap: break-word;
@@ -119,10 +114,27 @@ export default {
 
 .card-images {
   display: flex;
+
   flex-wrap: wrap;
   justify-content: center;
 
   margin: 0 auto;
+}
+
+.card-images button {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  align-items: center;
 }
 
 .buy-button {
@@ -149,6 +161,8 @@ export default {
 
   text-decoration: none;
   margin-bottom: 4px;
+  flex-direction: row;
+  margin-right: 14px;
 }
 .buy-button:hover {
   transition: all 0.1s ease;
@@ -174,6 +188,8 @@ export default {
 
   text-decoration: none;
   margin-bottom: 4px;
+  margin-left: 14px;
+  flex-direction: row;
 }
 
 .button-remove:hover {
