@@ -55,6 +55,11 @@
 import { mapGetters } from "vuex";
 
 export default {
+  data: function () {
+    return {
+      clicked: false,
+    };
+  },
   created: function () {
     this.$store.dispatch("productsModule/getProducts");
   },
@@ -72,6 +77,12 @@ export default {
         value: value,
       });
     },
+    clickIncrementHeart(value) {
+      this.$store.dispatch("calculatorModule/incrementHeart", {
+        value: value,
+      });
+    },
+    changeColor() {},
   },
   computed: mapGetters({
     productsState: "getProductsState",
@@ -82,6 +93,17 @@ export default {
 
 
 <style scoped>
+.white {
+  background-color: white;
+  width: 200px;
+  height: 200px;
+}
+.red {
+  width: 200px;
+  height: 200px;
+  background-color: red;
+}
+
 .card {
   background-color: #fff;
 
@@ -135,6 +157,15 @@ export default {
   justify-content: center;
 
   align-items: center;
+}
+
+.heart-button:click {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  color: red;
+  background-color: red;
 }
 
 .buy-button {

@@ -4,11 +4,15 @@ export default {
   state: {
     counter: {
       count: 0,
+      heart: 0,
     },
   },
   mutations: {
     INCR_COUNTER: function (state) {
       state.counter.count = state.counter.count + 1;
+    },
+    INCREMENT_HEART: function (state, payload) {
+      state.counter.heart = state.counter.heart + payload.value;
     },
     DECR_COUNTER: function (state, payload) {
       state.counter.count = state.counter.count - payload.value;
@@ -26,6 +30,9 @@ export default {
     },
     incrementValue: function ({ commit }, payload) {
       return commit("INCREMENT_VALUE", payload);
+    },
+    incrementHeart: function ({ commit }, payload) {
+      return commit("INCREMENT_HEART", payload);
     },
   },
 };
