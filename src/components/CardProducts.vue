@@ -8,6 +8,9 @@
 
         <br />
       </div>
+      <div v-else>
+        <h1 class="shopping-cart-empty">🛒 Cart empty!!</h1>
+      </div>
       <b-col cols="12">
         <div class="card-images">
           <b-card
@@ -278,7 +281,23 @@ h1 {
 
   box-shadow: 1px 2px 3px 4px rgba(20, 20, 20, 0.4);
 }
+.shopping-cart-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  width: 40%;
+
+  margin: 18px;
+
+  box-shadow: 1px 2px 3px 4px rgba(20, 20, 20, 0.4);
+}
 .section {
   display: flex;
   align-items: center;
