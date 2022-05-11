@@ -5,6 +5,7 @@ export default {
     counter: {
       count: 0,
       heart: 0,
+      name: String,
     },
   },
   mutations: {
@@ -20,6 +21,9 @@ export default {
     INCREMENT_VALUE: function (state, payload) {
       state.counter.count = state.counter.count + payload.value;
     },
+    NAME_VALUE: function (state, payload) {
+      state.counter.count = state.counter.name + payload.name;
+    },
   },
   actions: {
     incrementCounter: function ({ commit }) {
@@ -33,6 +37,9 @@ export default {
     },
     incrementHeart: function ({ commit }, payload) {
       return commit("INCREMENT_HEART", payload);
+    },
+    name: function ({ commit }, payload) {
+      return commit("NAME_VALUE", payload);
     },
   },
 };

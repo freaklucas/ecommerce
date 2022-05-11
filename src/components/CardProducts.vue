@@ -4,13 +4,16 @@
       <h1 class="title">Sneakers, Select your favorite product ;)</h1>
       <div class="shopping-cart" v-if="calculatorState.count > 1">
         <h1 class="section">🛒 Cart</h1>
-        <h2>$ {{ calculatorState.count }} | {{ productsState.title }}</h2>
-
+        <h2>
+          $ {{ calculatorState.count }} -
+          {{ productsState.products.name }}
+        </h2>
         <br />
       </div>
       <div v-else>
         <h1 class="shopping-cart-empty">🛒 Cart empty!!</h1>
       </div>
+
       <b-col cols="12">
         <div class="card-images">
           <b-card
@@ -33,6 +36,7 @@
             </b-card-text>
 
             <p href="#" variant="primary">Price: {{ image.price }}</p>
+
             <div class="buttons">
               <button
                 @click="clickIncrementValue(image.price)"
@@ -68,7 +72,7 @@ export default {
   },
   methods: {
     clickIncrement() {
-      this.$stire.dispatch("calculatorModule/incrementCounter");
+      this.$store.dispatch("calculatorModule/incrementCounter");
     },
     clickDecrement(value) {
       this.$store.dispatch("calculatorModule/decrementCounter", {
