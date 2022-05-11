@@ -10,8 +10,14 @@
         </h2>
         <br />
       </div>
+
       <div v-else>
         <h1 class="shopping-cart-empty">🛒 Cart empty!!</h1>
+      </div>
+
+      <div class="shopping-cart top">
+        <h1 class="title">Search</h1>
+        <input type="text" placeholder="search your product..." />
       </div>
 
       <b-col cols="12">
@@ -59,7 +65,10 @@
 </template>
 
 <script>
+import { ref } from "vue";
 import { mapGetters } from "vuex";
+
+let input = ref("");
 
 export default {
   data: function () {
@@ -90,6 +99,12 @@ export default {
       });
     },
     changeColor() {},
+
+    filterList() {
+      return this.state.productsList.products.filter((product) => {
+        return product.title.toLowerCase().includes(input.toLowerCase());
+      });
+    },
   },
   computed: mapGetters({
     productsState: "getProductsState",
@@ -100,6 +115,23 @@ export default {
 
 
 <style scoped>
+input {
+  display: block;
+  width: 350px;
+  margin: 20px auto;
+  padding: 10px 45px;
+  background: white url("../assets/search-icon.svg") no-repeat 15px center;
+  background-size: 15px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.top {
+  margin-top: 2rem;
+}
 .white {
   background-color: white;
   width: 200px;
