@@ -17,7 +17,14 @@
 
       <div class="shopping-cart top">
         <h1 class="title">Search</h1>
-        <input type="text" placeholder="search your product..." />
+        <input
+          type="text"
+          placeholder="search your product..."
+          v-model="search"
+        />
+        <div class="container" v-for="r of filter" :key="r.id">
+          <h2>{{ r.title }}</h2>
+        </div>
       </div>
 
       <b-col cols="12">
@@ -65,15 +72,13 @@
 </template>
 
 <script>
-import { ref } from "vue";
 import { mapGetters } from "vuex";
 
-let input = ref("");
-
 export default {
-  data: function () {
+  data() {
     return {
       clicked: false,
+      search: [],
     };
   },
   created: function () {
@@ -99,17 +104,25 @@ export default {
       });
     },
     changeColor() {},
-
-    filterList() {
-      return this.state.productsList.products.filter((product) => {
-        return product.title.toLowerCase().includes(input.toLowerCase());
-      });
-    },
   },
   computed: mapGetters({
     productsState: "getProductsState",
     calculatorState: "getCalculatorState",
   }),
+  filter() {
+    if (!this.search) {
+      console.log(this.productsState.products);
+      return this.productsState.products;
+    } else {
+      return this.state.productsList.products.filter((product) => {
+        console.log(
+          product.title.toLowerCase().includes(this.search.toLowerCase())
+        );
+
+        product.title.toLowerCase().includes(this.search.toLowerCase());
+      });
+    }
+  },
 };
 </script>
 
