@@ -2,29 +2,21 @@
   <b-container class="bv-example-row bv-example-row-flex-cols container">
     <b-row align="center">
       <h1 class="title">Sneakers, Select your favorite product ;)</h1>
+
       <div class="shopping-cart" v-if="calculatorState.count > 1">
         <h1 class="section">🛒 Cart</h1>
         <h2>
           $ {{ calculatorState.count }} -
           {{ productsState.products.name }}
         </h2>
+
+        <SearchProducts />
+
         <br />
       </div>
 
       <div v-else>
         <h1 class="shopping-cart-empty">🛒 Cart empty!!</h1>
-      </div>
-
-      <div class="shopping-cart top">
-        <h1 class="title">Search</h1>
-        <input
-          type="text"
-          placeholder="search your product..."
-          v-model="search"
-        />
-        <div class="container" v-for="r of filter" :key="r.id">
-          <h2>{{ r.title }}</h2>
-        </div>
       </div>
 
       <b-col cols="12">
@@ -74,11 +66,16 @@
 <script>
 import { mapGetters } from "vuex";
 
+import SearchProducts from "./SearchProducts.vue";
+
 export default {
+  components: {
+    SearchProducts,
+  },
+
   data() {
     return {
       clicked: false,
-      search: [],
     };
   },
   created: function () {
@@ -109,20 +106,6 @@ export default {
     productsState: "getProductsState",
     calculatorState: "getCalculatorState",
   }),
-  filter() {
-    if (!this.search) {
-      console.log(this.productsState.products);
-      return this.productsState.products;
-    } else {
-      return this.state.productsList.products.filter((product) => {
-        console.log(
-          product.title.toLowerCase().includes(this.search.toLowerCase())
-        );
-
-        product.title.toLowerCase().includes(this.search.toLowerCase());
-      });
-    }
-  },
 };
 </script>
 
