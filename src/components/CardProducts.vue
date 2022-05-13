@@ -5,12 +5,25 @@
 
       <div class="shopping-cart" v-if="calculatorState.count > 1">
         <h1 class="section">🛒 Cart</h1>
-        <h2>
-          $ {{ calculatorState.count }} -
-          {{ productsState.products.name }}
-        </h2>
+        <h2>$ {{ calculatorState.count }} -</h2>
 
-        <SearchProducts />
+        <!-- <SearchProducts /> -->
+
+        <div class="container">
+          <div class="shopping-cart top">
+            <h1 class="title">Search</h1>
+            <input
+              type="text"
+              placeholder="search your product..."
+              v-model="search"
+            />
+            <div class="container" v-for="r of searchElement" :key="r.id">
+              <h2>{{ r.title }}</h2>
+              <h1>{{ r }}</h1>
+              <br /><br />
+            </div>
+          </div>
+        </div>
 
         <br />
       </div>
@@ -66,16 +79,17 @@
 <script>
 import { mapGetters } from "vuex";
 
-import SearchProducts from "./SearchProducts.vue";
+// import SearchProducts from "./SearchProducts.vue";
 
 export default {
   components: {
-    SearchProducts,
+    // SearchProducts,
   },
 
   data() {
     return {
       clicked: false,
+      search: "",
     };
   },
   created: function () {
@@ -100,7 +114,23 @@ export default {
         value: value,
       });
     },
-    changeColor() {},
+    searchElement() {
+      // search filter element in products
+      // this.$store.dispatch("productsModule/searchElement", {
+      //   search: this.search,
+      // });
+      // if (this.search) {
+      //   return this.productsState.products.filter((p) => {
+      //     return p.title.toLowerCase().includes(this.search.toLowerCase());
+      //   });
+      // } else {
+      //   return this.$store.state.products;
+      // }
+
+      return this.productsState.products.filter((e) =>
+        e.toLowerCase().includes(this.search.value.toLowerCase())
+      );
+    },
   },
   computed: mapGetters({
     productsState: "getProductsState",

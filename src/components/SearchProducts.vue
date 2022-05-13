@@ -1,17 +1,5 @@
-<template>
-  <div class="container">
-    <div class="shopping-cart top">
-      <h1 class="title">Search</h1>
-      <input
-        type="text"
-        placeholder="search your product..."
-        v-model="search"
-      />
-      <div class="container" v-for="r of filterSearch" :key="r.id">
-        <h2>{{ r.title }}</h2>
-      </div>
-    </div>
-  </div>
+<!-- <template>
+  <div></div>
 </template>
 
 <script>
@@ -23,12 +11,12 @@ export default {
   },
   computed: {
     filterSearch() {
-      if (!this.search) {
-        return this.productsState.products;
-      } else {
-        return this.state.productsList.products.filter((product) => {
-          product.title.toLowerCase().includes(this.search.toLowerCase());
+      if (this.search) {
+        return this.$store.state.products.filter((p) => {
+          return p.title.toLowerCase().includes(this.search.toLowerCase());
         });
+      } else {
+        return this.$store.state.products;
       }
     },
   },
@@ -60,4 +48,4 @@ export default {
 
   box-shadow: 1px 2px 3px 4px rgba(20, 20, 20, 0.4);
 }
-</style>
+</style> -->
