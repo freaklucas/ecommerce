@@ -114,23 +114,6 @@ export default {
         value: value,
       });
     },
-    searchElement() {
-      // search filter element in products
-      // this.$store.dispatch("productsModule/searchElement", {
-      //   search: this.search,
-      // });
-      // if (this.search) {
-      //   return this.productsState.products.filter((p) => {
-      //     return p.title.toLowerCase().includes(this.search.toLowerCase());
-      //   });
-      // } else {
-      //   return this.$store.state.products;
-      // }
-
-      return this.productsState.products.filter((e) =>
-        e.toLowerCase().includes(this.search.value.toLowerCase())
-      );
-    },
   },
   computed: mapGetters({
     productsState: "getProductsState",

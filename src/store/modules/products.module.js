@@ -3,6 +3,7 @@ import axios from "axios";
 export default {
   namespaced: true,
   state: {
+    filteredProducts: [],
     productsList: {
       products: [],
       errorMessage: null,
@@ -14,6 +15,11 @@ export default {
     },
     GET_PRODUCTS_ERROR: function (state, payload) {
       state.productsList.errorMessage = payload.errorMessage;
+    },
+    FILTER_PRODUCTS: function (state, searchTerm) {
+      return (state.filteredProducts = state.products.filter((product) => {
+        return product.name.toLowerCase().includes(searchTerm.toLowerCase());
+      }));
     },
   },
   actions: {
@@ -28,6 +34,9 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    filterProducts({ commit }, searchTerm) {
+      return commit("FILTER_PRODUCTS", searchTerm);
     },
   },
 };
