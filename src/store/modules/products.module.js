@@ -16,7 +16,11 @@ export default {
     GET_PRODUCTS_ERROR: function (state, payload) {
       state.productsList.errorMessage = payload.errorMessage;
     },
-    FILTER_PRODUCTS: function (state, searchTerm) {
+    SET_PRODUCTS(state, products) {
+      state.products = products;
+      state.filteredProducts = products;
+    },
+    filterProducts: function (state, searchTerm) {
       return (state.filteredProducts = state.products.filter((product) => {
         return product.name.toLowerCase().includes(searchTerm.toLowerCase());
       }));
@@ -29,14 +33,14 @@ export default {
         let response = await axios.get(dataUrl);
 
         commit("GET_PRODUCTS_SUCCESS", { products: response.data });
-
+        commit("SET_PRODUCTS", response.data);
         console.log(response.data);
       } catch (error) {
         console.log(error);
       }
     },
     filterProducts({ commit }, searchTerm) {
-      return commit("FILTER_PRODUCTS", searchTerm);
+      commit("filterProducts", searchTerm);
     },
   },
 };

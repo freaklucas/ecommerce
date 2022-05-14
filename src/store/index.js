@@ -24,5 +24,8 @@ export default new Vuex.Store({
     getCalculatorState: function (state) {
       return state.calculatorState.counter;
     },
+    getFilterProductsState: function (state) {
+      return state.productsState.filteredProducts;
+    },
   },
 });

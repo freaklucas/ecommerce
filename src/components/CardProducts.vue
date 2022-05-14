@@ -17,9 +17,13 @@
               placeholder="search your product..."
               v-model="search"
             />
-            <div class="container" v-for="r of searchElement" :key="r.id">
-              <h2>{{ r.title }}</h2>
-              <h1>{{ r }}</h1>
+            <div
+              class="container"
+              v-for="product in filteredProducts"
+              :key="product.title"
+            >
+              <h2>{{ product.title }}</h2>
+
               <br /><br />
             </div>
           </div>
@@ -118,6 +122,7 @@ export default {
   computed: mapGetters({
     productsState: "getProductsState",
     calculatorState: "getCalculatorState",
+    filteredProducts: "getFilterProductsState",
   }),
 };
 </script>
