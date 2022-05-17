@@ -101,6 +101,18 @@ export default {
     this.$store.dispatch("productsModule/getProducts");
   },
   methods: {
+    resultQuery() {
+      if (this.search) {
+        return this.resources.filter((item) => {
+          return this.search
+            .toLowerCase()
+            .split(" ")
+            .every((v) => item.title.toLowerCase().includes(v));
+        });
+      } else {
+        return this.resources;
+      }
+    },
     clickIncrement() {
       this.$store.dispatch("calculatorModule/incrementCounter");
     },
@@ -125,18 +137,6 @@ export default {
     calculatorState: "getCalculatorState",
     filteredProducts: "getFilterProductsState",
   }),
-  resultQuery() {
-    if (this.search) {
-      return this.resources.filter((item) => {
-        return this.search
-          .toLowerCase()
-          .split(" ")
-          .every((v) => item.title.toLowerCase().includes(v));
-      });
-    } else {
-      return this.resources;
-    }
-  },
 };
 </script>
 
