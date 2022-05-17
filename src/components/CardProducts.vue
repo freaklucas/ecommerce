@@ -18,6 +18,34 @@
 
       <b-col cols="12">
         <div class="card-images">
+          <div class="container" v-if="filteredProducts.length">
+            <div class="shopping-cart top">
+              <h1 class="title">Search</h1>
+              <!-- add this all element using for of api -->
+              <div
+                v-for="element in productsState.products"
+                :key="element.name"
+              >
+                {{ element }}
+              </div>
+              <input
+                type="text"
+                placeholder="search your product..."
+                v-model="search"
+              />
+              <div
+                class="container"
+                v-for="product in resultQuery"
+                :key="product.title"
+              >
+                <td>
+                  <a>{{ input.product.title }}</a>
+                </td>
+
+                <br /><br />
+              </div>
+            </div>
+          </div>
           <b-card
             img-alt="Image"
             img-top
@@ -54,28 +82,6 @@
               </button>
             </div>
           </b-card>
-        </div>
-
-        <div class="container" v-if="filteredProducts.length">
-          <div class="shopping-cart top">
-            <h1 class="title">Search</h1>
-            <input
-              type="text"
-              placeholder="search your product..."
-              v-model="search"
-            />
-            <div
-              class="container"
-              v-for="product in resultQuery"
-              :key="product.title"
-            >
-              <td>
-                <a>{{ product }}</a>
-              </td>
-
-              <br /><br />
-            </div>
-          </div>
         </div>
       </b-col>
     </b-row>
