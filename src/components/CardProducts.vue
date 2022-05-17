@@ -9,26 +9,6 @@
 
         <!-- <SearchProducts /> -->
 
-        <div class="container">
-          <div class="shopping-cart top">
-            <h1 class="title">Search</h1>
-            <input
-              type="text"
-              placeholder="search your product..."
-              v-model="search"
-            />
-            <div
-              class="container"
-              v-for="product in filteredProducts"
-              :key="product.title"
-            >
-              <h2>{{ product.title }}</h2>
-
-              <br /><br />
-            </div>
-          </div>
-        </div>
-
         <br />
       </div>
 
@@ -75,6 +55,28 @@
             </div>
           </b-card>
         </div>
+
+        <div class="container" v-if="filteredProducts.length">
+          <div class="shopping-cart top">
+            <h1 class="title">Search</h1>
+            <input
+              type="text"
+              placeholder="search your product..."
+              v-model="search"
+            />
+            <div
+              class="container"
+              v-for="product in resultQuery"
+              :key="product.title"
+            >
+              <td>
+                <a>{{ product }}</a>
+              </td>
+
+              <br /><br />
+            </div>
+          </div>
+        </div>
       </b-col>
     </b-row>
   </b-container>
@@ -89,7 +91,6 @@ export default {
   components: {
     // SearchProducts,
   },
-
   data() {
     return {
       clicked: false,
@@ -124,6 +125,18 @@ export default {
     calculatorState: "getCalculatorState",
     filteredProducts: "getFilterProductsState",
   }),
+  resultQuery() {
+    if (this.search) {
+      return this.resources.filter((item) => {
+        return this.search
+          .toLowerCase()
+          .split(" ")
+          .every((v) => item.title.toLowerCase().includes(v));
+      });
+    } else {
+      return this.resources;
+    }
+  },
 };
 </script>
 
