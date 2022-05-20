@@ -1,5 +1,8 @@
 <!-- <template>
-  <div></div>
+  <div>
+    {{ search }}
+    <input type="text" :name="name" v-model="model" /> 
+</div>
 </template>
 
 <script>

@@ -2,9 +2,13 @@
   <b-container class="bv-example-row bv-example-row-flex-cols container">
     <b-row align="center">
       <h1 class="title">Sneakers, Select your favorite product ;)</h1>
+      <div v-for="i in productsState.products" :key="i.id">
+        <h1>{{ productsState.products }}</h1>
+      </div>
 
       <div class="shopping-cart" v-if="calculatorState.count > 1">
         <h1 class="section">🛒 Cart</h1>
+
         <h2>$ {{ calculatorState.count }} -</h2>
 
         <!-- <SearchProducts /> -->
@@ -18,31 +22,17 @@
 
       <b-col cols="12">
         <div class="card-images">
-          <div class="container" v-if="filteredProducts.length">
+          <div class="container">
             <div class="shopping-cart top">
               <h1 class="title">Search</h1>
               <!-- add this all element using for of api -->
-              <div
-                v-for="element in productsState.products"
-                :key="element.name"
-              >
-                {{ element }}
-              </div>
               <input
                 type="text"
                 placeholder="search your product..."
                 v-model="search"
               />
-              <div
-                class="container"
-                v-for="product in resultQuery"
-                :key="product.title"
-              >
-                <td>
-                  <a>{{ input.product.title }}</a>
-                </td>
-
-                <br /><br />
+              <div v-for="r of resultQuery" :key="r.title">
+                {{ r }}
               </div>
             </div>
           </div>
@@ -108,8 +98,8 @@ export default {
   },
   methods: {
     resultQuery() {
-      if (this.search) {
-        return this.resources.filter((item) => {
+      if (this.productsState.products) {
+        return this.productsState.products.filter((item) => {
           return this.search
             .toLowerCase()
             .split(" ")
